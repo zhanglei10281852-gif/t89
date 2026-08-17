@@ -240,7 +240,7 @@ function onCustomerChange() {
   form.advance_payment = 0
   if (form.customer_id) {
     api.quotes.list({ customer_id: form.customer_id }).then(res => {
-      customerQuotes.value = res.data?.filter(q => q.is_confirmed) || []
+      customerQuotes.value = res?.filter(q => q.is_confirmed) || []
     })
   }
 }
@@ -344,9 +344,9 @@ async function loadData() {
       api.customers.list(),
       api.users.planners()
     ])
-    contracts.value = contractsRes.data || []
-    customers.value = customersRes.data || []
-    planners.value = plannersRes.data || []
+    contracts.value = contractsRes || []
+    customers.value = customersRes || []
+    planners.value = plannersRes || []
   } finally {
     loading.value = false
   }

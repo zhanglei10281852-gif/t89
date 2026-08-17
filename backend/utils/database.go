@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -20,10 +21,15 @@ func InitDB() {
 	}
 
 	var err error
-	DB, err = gorm.Open(sqlite.Open(config.AppConfig.DBPath), &gorm.Config{})
+	DB, err = gorm.Open(sqlite.Open(SQLiteDSN(config.AppConfig.DBPath)), &gorm.Config{TranslateError: true})
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
+	sqlDB, err := DB.DB()
+	if err != nil {
+		log.Fatalf("Failed to configure database pool: %v", err)
+	}
+	sqlDB.SetMaxOpenConns(8)
 
 	err = DB.AutoMigrate(
 		&models.User{},
@@ -42,4 +48,11 @@ func InitDB() {
 	}
 
 	log.Println("Database initialized successfully")
+}
+
+func SQLiteDSN(path string) string {
+	return fmt.Sprintf(
+		"file:%s?_foreign_keys=on&_busy_timeout=5000&_journal_mode=WAL&_txlock=immediate",
+		filepath.ToSlash(path),
+	)
 }

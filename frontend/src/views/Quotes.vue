@@ -151,8 +151,8 @@ async function loadData() {
       api.quotes.list(params),
       api.customers.list()
     ])
-    quotes.value = quotesRes.data || []
-    customers.value = customersRes.data || []
+    quotes.value = quotesRes || []
+    customers.value = customersRes || []
   } finally {
     loading.value = false
   }

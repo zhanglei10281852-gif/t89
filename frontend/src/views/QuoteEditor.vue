@@ -280,14 +280,14 @@ async function loadData() {
     api.quotes.list({ customer_id: customerId })
   ])
   
-  customer.value = customerRes.data
-  packages.value = packagesRes.data || []
-  serviceItems.value = serviceRes.data || []
-  existingQuotes.value = quotesRes.data || []
+  customer.value = customerRes
+  packages.value = packagesRes || []
+  serviceItems.value = serviceRes || []
+  existingQuotes.value = quotesRes || []
 
   if (quoteId) {
     const quoteRes = await api.quotes.get(quoteId)
-    const quote = quoteRes.data
+    const quote = quoteRes
     if (quote) {
       quoteType.value = quote.is_custom ? 'custom' : 'package'
       if (!quote.is_custom && quote.package_id) {

@@ -219,11 +219,11 @@ async function loadAllStats() {
     api.stats.luckyComparison(currentYear.value)
   ])
   
-  monthlyData.value = monthlyRes.data?.data || []
+  monthlyData.value = monthlyRes.data || []
   conversion.value = conversionRes
-  plannerLoad.value = plannerRes.data?.data || []
-  packageRank.value = pkgRankRes.data || []
-  serviceRank.value = svcRankRes.data || []
+  plannerLoad.value = plannerRes.data || []
+  packageRank.value = pkgRankRes || []
+  serviceRank.value = svcRankRes || []
   luckyComparison.value = luckyRes
 }
 

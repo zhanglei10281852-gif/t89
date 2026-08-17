@@ -110,7 +110,7 @@ async function loadData() {
     api.stats.conversion()
   ])
 
-  stats.value.todayConsult = customersRes.data?.filter(c => 
+  stats.value.todayConsult = customersRes?.filter(c =>
     dayjs(c.created_at).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')
   ).length || 0
   
@@ -118,7 +118,7 @@ async function loadData() {
   stats.value.monthRevenue = ((monthlyRes.data?.find(d => d.month === month)?.amount || 0) / 10000)
   stats.value.conversionRate = conversionRes.conversion_rate || 0
 
-  recentCustomers.value = customersRes.data?.slice(0, 5).map(c => ({
+  recentCustomers.value = customersRes?.slice(0, 5).map(c => ({
     ...c,
     name: c.groom_name + ' & ' + c.bride_name,
     budget: `${c.budget_min || 0}-${c.budget_max || 0}万`
@@ -144,7 +144,7 @@ async function loadData() {
       left: '10%',
       width: '80%',
       label: { position: 'inside', formatter: '{b}\n{c}人' },
-      data: funnelRes.data?.map(d => ({ value: d.count, name: d.label })) || []
+      data: funnelRes?.map(d => ({ value: d.count, name: d.label })) || []
     }]
   }
 }

@@ -164,7 +164,7 @@ async function handleSubmit() {
 
 async function loadData() {
   const res = await api.packages.list()
-  packages.value = res.data || []
+  packages.value = res || []
 }
 
 onMounted(loadData)

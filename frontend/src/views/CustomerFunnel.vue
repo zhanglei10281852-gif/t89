@@ -188,8 +188,8 @@ async function loadData() {
     api.customers.funnel(),
     api.customers.list()
   ])
-  funnelData.value = funnelRes.data || []
-  allCustomers.value = customersRes.data || []
+  funnelData.value = funnelRes || []
+  allCustomers.value = customersRes || []
 }
 
 onMounted(loadData)

@@ -170,15 +170,15 @@ async function loadCalendar() {
     api.schedules.calendar(currentYear.value),
     api.schedules.luckyDays()
   ])
-  calendarData.value = calRes.data?.data || []
-  luckyDays.value = luckyRes.data || []
+  calendarData.value = calRes.data || []
+  luckyDays.value = luckyRes || []
 }
 
 async function checkAvailability(date) {
   if (!date) return
   const dateStr = date.format('YYYY-MM-DD')
   const res = await api.schedules.availability(dateStr)
-  availabilityData.value = res.data || []
+  availabilityData.value = res || []
   selectedDate.value = { date: dateStr }
 }
 

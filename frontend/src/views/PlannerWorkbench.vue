@@ -228,9 +228,9 @@ async function loadData() {
       api.contracts.list(),
       api.customers.list()
     ])
-    mySchedules.value = schedulesRes.data || []
-    allContracts.value = contractsRes.data || []
-    allCustomers.value = customersRes.data || []
+    mySchedules.value = schedulesRes || []
+    allContracts.value = contractsRes || []
+    allCustomers.value = customersRes || []
   } finally {
     loading.value = false
   }

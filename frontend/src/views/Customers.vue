@@ -263,7 +263,7 @@ async function loadData() {
     const params = {}
     if (filterStatus.value) params.status = filterStatus.value
     const res = await api.customers.list(params)
-    let list = res.data || []
+    let list = res || []
     if (searchText.value) {
       const text = searchText.value.toLowerCase()
       list = list.filter(c => 
